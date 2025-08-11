@@ -14,15 +14,6 @@ from visualization.charts import (
 )
 from util.export import create_excel_report, create_enhanced_pdf_report
 
-import os, datetime, subprocess
-def _git_sha():
-    try: return subprocess.check_output(["git","rev-parse","--short","HEAD"], text=True).strip()
-    except: return "no-git"
-st.sidebar.caption(f"🧭 file: {__file__}")
-st.sidebar.caption(f"📂 cwd : {os.getcwd()}")
-st.sidebar.caption(f"🔖 git: {_git_sha()}  ⏱ {datetime.datetime.now().strftime('%H:%M:%S')}")
-
-
 st.set_page_config(page_title="SK에너지 경쟁사 분석 대시보드", page_icon="⚡", layout="wide")
 
 def initialize_session_state():
