@@ -114,8 +114,10 @@ def main():
                 chart_df = pd.melt(ratio_df, id_vars=['구분'], value_vars=raw_cols, var_name='회사', value_name='수치')
                 chart_df['회사'] = chart_df['회사'].str.replace('_원시값', '')
                 if PLOTLY_AVAILABLE:
-                    st.plotly_chart(create_sk_bar_chart(chart_df), use_container_width=True, key="dart_bar_chart")
-                    st.plotly_chart(create_sk_radar_chart(chart_df), use_container_width=True, key="dart_radar_chart")
+                    qdf = sort_quarterly_by_quarter(st.session_state.quarterly_data)
+                    st.plotly_chart(create_quarterly_trend_chart(qdf), use_container_width=True, key="dart_quarterly_trend")
+                    st.plotly_chart(create_gap_trend_chart(qdf),      use_container_width=True, key="dart_gap_trend")
+
 
         if 'quarterly_data' in st.session_state and st.session_state.quarterly_data is not None:
             st.markdown("---")
